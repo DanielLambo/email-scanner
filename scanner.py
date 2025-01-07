@@ -67,7 +67,7 @@ st.divider()
 st.write("Email addresses are a primary vector for phishing attacks. A 2023 report by [Source: Insert source here - e.g., Verizon Data Breach Investigations Report] found that phishing accounted for 36% of all data breaches, highlighting its significance.   \n\nKey Statistics:\nSpoofed Addresses: A significant portion of phishing emails utilize spoofed sender addresses, mimicking legitimate entities. The Anti-Phishing Working Group (APWG) reports a high prevalence of spoofed senders in phishing campaigns.   \n\nEmail Address Anomalies: Suspicious email addresses, characterized by unusual characters, excessive length, or misspellings, are often indicative of malicious activity.  ")
 st.image("phishing_email.jpg",caption = "https://keepnetlabs.com/blog/10-easy-ways-to-detect-phishing-email", width = 590)
 st.divider()
-st.header(":blue[Malicious Links? But how do we even know]")
+st.header(":blue[Malicious :red[Links?] But how do we even know]")
 st.write("Email addresses are a big clue, but links are another major red flag. Let's dive deeper into what makes a link suspicious?")
 st.divider()
 st.write("Phishing attacks frequently involve emails containing malicious links designed to deceive recipients into divulging sensitive information or installing malware. Notably, 12.3% of employees have clicked on such links within phishing emails.  Additionally, nearly 1.2% of all emails sent are malicious, translating to approximately 3.4 billion phishing emails daily.  Alarmingly, 34% of users have engaged in actions that compromise security, such as clicking on malicious links, underscoring the persistent threat posed by these deceptive tactics. ")
@@ -230,3 +230,107 @@ Learn more here: [Phishing and Email Security Insights](https://www.csoonline.co
 st.write(malicious_text)
 st.image("Example-of-malicious-URL (1).png", caption = "https://experteq.com/what-is-a-malicious-url-and-how-do-we-protect-against-them/")
 st.image("Don&#039;t Click Poster.png", width = 598,caption="https://www.kent.edu/secureit/malicious-links")
+
+st.divider()
+st.header(":blue[Malicious Email :red[Content?] But how do we even know]")
+st.write("Email addresses can provide significant clues, with links serving as another major red flag. Ultimately, leveraging machine learning to analyze email content is crucial for effectively identifying spam.")
+st.divider()
+st.write("We will begin by training a machine learning model using scikit-learn and a dataset categorized into two classes: phishing and non-phishing. The dataset is available at the following link.")
+st.write("https://drive.google.com/file/d/1f-qsFeoXt0i0H4yUbQuX5-oLcD_swzIY/view?usp=sharing")
+st.write("")
+st.write("We employ resampling techniques, such as decreasing the number of instances in the majority class, to address class imbalance.")
+resampling = '''# We will use undersapling technique 
+Safe_Email = df[df["Email Type"]== "Safe Email"]
+Phishing_Email = df[df["Email Type"]== "Phishing Email"]
+Safe_Email = Safe_Email.sample(Phishing_Email.shape[0])'''
+st.code(resampling, language = "python")
+learning_method = '''I experimented with two different machine learning models: the Random Forest Classifier and the Support Vector Machine (SVM). The performance of these models yielded contrasting results:
+
+Random Forest Classifier:
+
+Accuracy: 0.931
+The Random Forest Classifier achieved impressive results with an accuracy of 0.931.
+It demonstrated a great ability to accurately classify both legitimate and phishing emails. 
+The precision, recall, and F1 score provide additional insights into the model's performance on the various classes, which can be crucial for understanding the trade-offs involved.
+
+Support Vector Machine (SVM):
+
+Accuracy: 0.499
+In contrast, the Support Vector Machine (SVM) exhibited significantly lower performance, with an accuracy of only 0.499. 
+This suggests that the SVM model struggled to  differentiate between real and phishing emails in our dataset.
+
+So I would proceed using the random forest classifier 
+with an accuracy score of 0.931 compared to the accuracy score of the SVm which is 0.499
+
+A better explanation of the code can be provided here:
+
+https://colab.research.google.com/drive/1cPsis3TST5oWq-ecM8vH7w6VTJBfdWf2#scrollTo=38q6Hp1eEoJ9
+
+
+'''
+st.write(learning_method)
+
+
+#https://www.kaggle.com/code/elnahas/phishing-email-detection-using-svm-rfc/notebook
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+df= pd.read_csv("Phishing_Email.csv")
+df.isna().sum()
+
+df = df.dropna()
+email_type_counts = df['Email Type'].value_counts()
+Safe_Email = df[df["Email Type"]== "Safe Email"]
+Phishing_Email = df[df["Email Type"]== "Phishing Email"]
+Safe_Email = Safe_Email.sample(Phishing_Email.shape[0])
+Data= pd.concat([Safe_Email, Phishing_Email], ignore_index = True)
+# split the data into a metrix of features X and Dependent Variable y
+X = Data["Email Text"].values
+y = Data["Email Type"].values
+# lets splitting Our Data
+from sklearn.model_selection import train_test_split
+X_train,x_test,y_train,y_test = train_test_split(X, y, test_size = 0.3, random_state = 0)
+
+#Random Forest likely performed better because it is more suited to handling complex, noisy, and imbalanced data typical of phishing email datasets.
+# Importing Libraries for the model ,Tfidf and Pipeline
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.pipeline import Pipeline
+
+# define the Classifier
+classifier = Pipeline([("tfidf",TfidfVectorizer() ),("classifier",RandomForestClassifier(n_estimators=10))])# add another hyperparamters as U want
+
+classifier.fit(X_train,y_train)
+email = st.text_input("Enter an email to classify: \n")
+if email:
+# Predict the type of email (Safe or Phishing)
+    prediction = classifier.predict([email])
+    if prediction[0] == "Safe Email":
+        st.write("The email is classified as: Safe Email")
+    else:
+        st.write("The email is classified as: Phishing Email")
+    st.write("citing: https://www.kaggle.com/code/elnahas/phishing-email-detection-using-svm-rfc/notebook")
+
+
+
+conclusion = '''
+Here's a conclusion you can use for the website:  
+
+---
+
+### Conclusion: Staying Ahead of Malicious Threats  
+In today's digital landscape, where cyber threats are evolving at an unprecedented rate, understanding and combating malicious emails is crucial for both individuals and organizations. Through this research demo, we explored multiple facets of email security:  
+
+- **Email Address Analysis**: Leveraging tools like Hunter.io to identify suspicious patterns and anomalies in email addresses.  
+- **Malicious Link Detection**: Using techniques such as regular expressions and VirusTotal API to identify and assess risky URLs within email content.  
+- **Content-Based Machine Learning**: Training robust machine learning models to classify emails as phishing or safe, with tools like Random Forest Classifier yielding high accuracy.  
+
+This comprehensive approach demonstrates that a combination of research, practical tools, and machine learning models can significantly mitigate the risks associated with phishing and other email-based attacks.  
+
+As cyber threats continue to evolve, staying informed, vigilant, and equipped with the right tools is the best defense. By adopting these strategies and tools, you can take proactive steps to secure your digital environment and protect sensitive information.  
+
+Thank you for exploring this research demo. We hope it inspires further innovation and collaboration in the field of cybersecurity.
+'''
+st.write(conclusion)
+st.divider()
+st.write("Contact daniellambo77@gmail.com for furhter questions and inquiries")
