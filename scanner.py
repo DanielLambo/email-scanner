@@ -273,7 +273,6 @@ st.write(learning_method)
 
 #https://www.kaggle.com/code/elnahas/phishing-email-detection-using-svm-rfc/notebook
 import pandas as pd
-import matplotlib.pyplot as plt
 import numpy as np
 df= pd.read_csv("Phishing_Email.csv")
 df.isna().sum()
