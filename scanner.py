@@ -305,6 +305,7 @@ from sklearn.pipeline import Pipeline
 classifier = Pipeline([("tfidf",TfidfVectorizer() ),("classifier",RandomForestClassifier(n_estimators=10))])# add another hyperparamters as U want
 
 classifier.fit(X_train,y_train)
+st.subheader("DEMO HERE↓")
 email = st.text_input("Enter an email to classify: \n")
 if email:
 # Predict the type of email (Safe or Phishing)
@@ -318,9 +319,6 @@ if email:
 
 
 conclusion = '''
-Here's a conclusion you can use for the website:  
-
----
 
 ### Conclusion: Staying Ahead of Malicious Threats  
 In today's digital landscape, where cyber threats are evolving at an unprecedented rate, understanding and combating malicious emails is crucial for both individuals and organizations. Through this research demo, we explored multiple facets of email security:  
