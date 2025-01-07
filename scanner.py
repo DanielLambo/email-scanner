@@ -64,7 +64,7 @@ if email_address:
     time.sleep(2)
     st.write("Note: Risky does not mean definitely Malicious. \n\nCheck the Hunter API documentation for an indepth explanation of all fields here: \n")
     st.write("https://hunter.io/api-documentation/v2#email-verifier")
-    st.write("My code for this can be found here: https://colab.research.google.com/drive/1cPsis3TST5oWq-ecM8vH7w6VTJBfdWf2#scrollTo=x53x1tiuEqco&line=7&uniqifier=1 ")
+    st.write("My code for this can be found here: https://github.com/DanielLambo/email-scanner ")
 else:
     st.write("Input email to start evaluation")
 st.write("citation: [https://hunter.io/api-documentation/v2]")
@@ -269,8 +269,7 @@ with an accuracy score of 0.931 compared to the accuracy score of the SVm which 
 
 A better explanation of the code can be provided here:
 
-https://colab.research.google.com/drive/1cPsis3TST5oWq-ecM8vH7w6VTJBfdWf2#scrollTo=38q6Hp1eEoJ9
-
+https://github.com/DanielLambo/email-scanner
 
 '''
 st.write(learning_method)
@@ -305,15 +304,27 @@ from sklearn.pipeline import Pipeline
 classifier = Pipeline([("tfidf",TfidfVectorizer() ),("classifier",RandomForestClassifier(n_estimators=10))])# add another hyperparamters as U want
 
 classifier.fit(X_train,y_train)
+st.write("Phishing email sample here to test: ")
+phish = ''' Dear Customer,  
+         We are writing to inform you that your account has been temporarily suspended due to suspicious activity. 
+For your security, we require you to verify your identity immediately to prevent further disruption.
+To restore access to your account, please follow the link below and complete the verification process:  
+Verify My Account Now  Failure to verify your account within the next 24 hours will result in a permanent lock.  
+If you have any questions, please contact us at support@bank-secure-update.com.
+Thank you for your prompt attention to this matter. 
+
+Sincerely, 
+The Bank Security Team'''
+st.code(phish)
 st.subheader("DEMO HERE↓")
 email = st.text_input("Enter an email to classify: \n")
 if email:
 # Predict the type of email (Safe or Phishing)
     prediction = classifier.predict([email])
     if prediction[0] == "Safe Email":
-        st.write("The email is classified as: Safe Email")
+        st.subheader("The email is classified as: :blue[Safe Email]")
     else:
-        st.write("The email is classified as: Phishing Email")
+        st.subheader("The email is classified as: :red[Phishing Email]")
     st.write("citing: https://www.kaggle.com/code/elnahas/phishing-email-detection-using-svm-rfc/notebook")
 
 
