@@ -1,5 +1,10 @@
 import streamlit as st
+from dotenv import load_dotenv
+import os
 
+load_dotenv()
+hunter_api_key = os.getenv("HUNTER_API_KEY")
+virus_total_apikey = os.getenv("VIRUSTOTAL_API_KEY")
 
 st.title(":blue[Email Scanner Research Demo]")
 st.subheader("By: Daniel Lambo")
@@ -16,7 +21,7 @@ import requests
 import time
 
 HUNTER_API_URL = "https://api.hunter.io/v2/email-verifier"
-API_KEY = "c14d8bd13150d0b13b39a2fdbd1184e7c03f716e"  # Replace with your actual API key
+API_KEY = hunter_api_key  # Replace with your actual API key
 
 def extract_key_data(email_address):
     # Prepare the request parameters
@@ -163,7 +168,7 @@ def scan_url(text):
     return
 
   # Replace with your actual VirusTotal API key
-  api_key = "YOUR_API_KEY"
+  api_key = virus_total_apikey
 
   for inputpayload in urls:
     # VirusTotal URL encoding: the URL needs to be base64-encoded
