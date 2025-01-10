@@ -85,7 +85,7 @@ if email_address:
     time.sleep(2)
     st.write("Note: Risky does not mean definitely Malicious. \n\nCheck the Hunter API documentation for an indepth explanation of all fields here: \n")
     st.write("https://hunter.io/api-documentation/v2#email-verifier")
-    st.write("My code for this can be found here: https://colab.research.google.com/drive/1cPsis3TST5oWq-ecM8vH7w6VTJBfdWf2#scrollTo=x53x1tiuEqco&line=7&uniqifier=1 ")
+    st.write("My code for this can be found here: https://github.com/DanielLambo/email-scanner")
 else:
     st.write("Input email to start evaluation")
 st.write("citation: [https://hunter.io/api-documentation/v2]")
