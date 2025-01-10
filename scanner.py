@@ -1,13 +1,32 @@
 import streamlit as st
 
-
-st.title(":blue[Email Scanner Research Demo]")
+st.title(":blue[Unmasking Phishing: A Research Demo of an Email Scanner with Machine Learning & API Integration]")
 st.subheader("By: Daniel Lambo")
 st.subheader("Mentor: Dr Ed Pearson III")
+#st.subheader("Mentor: Dr Ed Pearson III")\
+st.header("PROBLEM:")
+st.divider()
+intro_statement = '''
+Let's be honest, who actually reads every single email these days?
+Our research-backed email scanner does the dirty work for you, 
+identifying those sneaky phishing attempts that try to trick even the most vigilant email users. 
+Because your time is too valuable to waste on suspicious emails.
+
+With powerful algorithms, we:
+
+-Analyze email links to detect and neutralize hidden viruses.
+
+-Verify sender addresses to identify known scam sources.
+
+-Examine email content to flag suspicious patterns and language.
+
+Don’t let cybercriminals outsmart you—empower your inbox with smart, proactive protection!
+'''
+st.subheader(intro_statement)
 st.header("INTRO: ", divider="gray")
 st.write("This research paper provides an in-depth exploration of how to effectively identify and combat malicious emails. By leveraging extensive research, we analyze the key characteristics and behavioral patterns of such emails, uncovering the traits that make them deceptive and harmful. The study not only delves into theoretical frameworks but also presents a practical, real-time solution.\n \n Through a detailed code demonstration, we showcase a functional approach to detecting and mitigating these threats as they occur. Our work addresses the problem comprehensively, presenting insights into the challenges of identifying malicious emails and offering a robust, actionable framework for real-world applications.")
 st.header("FIRST TELLTALE SIGN OF A SCAM: ", divider="gray")
-st.subheader("The email address itself :")
+st.subheader("The Email address itself :")
 st.write("The first telltale sign of a scam often lies within the email address itself.\nHere's why:\nSpoofed Addresses: Scammers frequently forge the \"From\" field to mimic legitimate entities. This can involve subtle variations in the domain name, such as replacing letters with similar-looking characters (e.g., \"0\" instead of \"O\") or using homoglyphs (visually similar characters).   \n\n1.) Suspicious Formatting: Unusual characters, excessive length, or misspellings in the email address can also raise red flags. Legitimate organizations typically maintain professional and consistent email addresses.   \n\n2.) By carefully examining the sender's address for inconsistencies and irregularities, individuals can significantly reduce their risk of falling victim to phishing attacks.")
 st.write("Citation : [https://hunter.io/api-documentation/v2]")
 st.divider()
@@ -332,4 +351,22 @@ Thank you for exploring this research demo. We hope it inspires further innovati
 '''
 st.write(conclusion)
 st.divider()
-st.write("Contact daniellambo77@gmail.com for furhter questions and inquiries")
+st.subheader("Future Improvements")
+future_work = '''
+
+Sophisticated Sentiment Analysis:
+
+--Move beyond basic positive/negative sentiment.
+Analyze for nuanced emotions like urgency, threats, and manipulative tactics (fear, greed, authority) within the email text.
+Enhanced Contextual Awareness:
+
+--Improve the model's understanding of the email's context by considering factors like sender-recipient relationships and past communication history.
+User-Friendly Browser Extension:
+
+--Develop a convenient browser extension for seamless integration into users' email workflows.
+Model Training with URL & Address Data:
+
+--Transition from relying solely on external APIs for URL and address scanning to incorporating these attributes as valuable features directly within the model's training process.
+'''
+st.write(future_work)
+st.caption("Contact daniellambo77@gmail.com for further questions and inquiries")
