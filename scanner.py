@@ -337,7 +337,6 @@ if email:
 
 
 conclusion = '''
-Here's a conclusion you can use for the website:  
 
 ---
 
