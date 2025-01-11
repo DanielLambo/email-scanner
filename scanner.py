@@ -6,8 +6,6 @@ st.title(":blue[Unmasking Phishing: A Research Demo of an Email Scanner with Mac
 load_dotenv()
 hunter_api_key = os.getenv("HUNTER_API_KEY")
 virus_total_apikey = os.getenv("VIRUSTOTAL_API_KEY")
-
-st.title(":blue[Email Scanner Research Demo]")
 st.subheader("By: Daniel Lambo")
 st.subheader("Mentor: Dr Ed Pearson III")
 #st.subheader("Mentor: Dr Ed Pearson III")\
