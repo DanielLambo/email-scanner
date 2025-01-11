@@ -15,7 +15,7 @@ intro_statement = '''
 Let's be honest, who actually reads every single email these days?
 Our research-backed email scanner does the dirty work for you, 
 identifying those sneaky phishing attempts that try to trick even the most vigilant email users. 
-Because your time is too valuable to waste on suspicious emails.
+:red[Because your time is too valuable to waste on suspicious emails.]
 
 With powerful algorithms, we:
 
